@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mh.member.mapper.MemberMapper">
+
+<select id="memberList" resultType="com.mh.member.vo.MemberVO">
+	select * from newmembers order by mno
+</select>
+
+<insert id="memberRegister">
+	insert into newmembers (mno, mname, email, pwd, cre_date, mod_date)
+	values (newmember_seq.nextval, #{mname}, #{email}, #{pwd}, sysdate, sysdate)
+</insert>
+
+<select id="memberGetOne" resultType="com.mh.member.vo.MemberVO">
+	select * from newmembers where mno=#{mno}
+</select>
+
+<update id="memberUpdate">
+	update newmembers
+	set mname=#{mname},
+		email=#{email},
+		pwd=#{pwd},
+		mod_date=sysdate
+	where mno=#{mno}
+</update>
+
+<delete id="memberDelete">
+	delete newmembers where mno=#{mno}
+</delete>
+
+<select id="authLogin" resultType="com.mh.member.vo.MemberVO">
+	select * from newmembers where email=#{email} and pwd=#{pwd}
+</select>
+
+<select id="checkEmail" resultType="com.mh.member.vo.MemberVO">
+	select * from newmembers where email=#{email}
+</select>
+
+<!-- 강사님 -->
+<select id="checkIdDup" resultType="com.mh.member.vo.MemberVO">
+	select * from newmembers where email=#{email}
+</select>
+
+</mapper>
